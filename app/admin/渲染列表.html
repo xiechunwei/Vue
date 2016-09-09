@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="lib/vue.min.js"></script>
+       <div id="app">
+           <ul>
+               <li v-for="tood in toods">
+                   {{tood.text}}
+               </li>
+           </ul>
+       </div>
+<script>
+    new Vue({
+        el:'#app',data:{
+            toods:[
+                {text:"Learn JavaScript"},
+                {text:"Learn Vue.js"},
+                {text:"Learn Html5"}
+            ]
+        }
+    })
+</script>
+</body>
+</html>
