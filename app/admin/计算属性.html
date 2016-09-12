@@ -3,8 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="lib/vue.min.js"></script>
 </head>
 <body>
-      
+      <div id="demo">
+          名<input v-model="firstName">
+          姓<input v-model="lastName">
+          {{fullName}}
+      </div>
+      <script>
+          var vm=new Vue({
+              el:'#demo',
+              data:{
+                  firstName:'Foo',
+                  lastName:'Bar',
+              },
+              computed:{
+                  //getter
+                  fullName:{
+                      get:function(){
+                          return this.firstName+' '+this.lastName;
+                      },
+                      set:function(newValue){
+                          var names=newValue.split(' ');
+                          this.firstName=names[0];
+                          this.lastName=names[names.length-1];
+                      }
+                  }
+              },
+              methods:{
+
+              }
+          });
+      </script>
 </body>
 </html>
