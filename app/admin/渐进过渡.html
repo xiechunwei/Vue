@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>Title</title>
+    <style>
+        ul{
+            padding-left:0 ;
+            font-family: Helvetica,Arial,sans-serif;
+        }
+        .staggered-transition{
+            transition: all .5s ease;
+            overflow: hidden;
+            margin: 0;
+            height: 20px;
+        }
+        .staggered-enter,.staggered-leave{
+            opacity: 0;
+            height: 0;
+        }
+    </style>
+</head>
+<body>
+<script src="lib/vue.min.js"></script>
+<div id="demo">
+        <input v-model="query">
+    <ul>
+        <li v-for="item in items | filterBy query" transition="staggered" stagger="50">
+            {{item.msg}}
+        </li>
+    </ul>
+</div>
+<script>
+    new Vue({
+        el:"#demo",
+        data:{
+            query:'',
+            items:[
+                {msg:'One'},
+                {msg:'Two'},
+                {msg:'Three'},
+                {msg:'Four'},
+                {msg:'Five'}
+            ]
+        },
+        transition:{
+            'stagger':{
+                stagger:function(index){
+                    return Math.min(300,index*50)
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>

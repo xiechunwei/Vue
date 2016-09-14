@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="lib/vue.min.js"></script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<div id="app">
+          <my-parent></my-parent>
+</div>
+<script>
+//    //定义
+//    var MyComponent=Vue.extend({
+//        template:'<div>A custom component</div>'
+//    })
+//    //注册
+//    Vue.component('my-component',MyComponent)
+
+    //局部注册
+//    var Child=Vue.extend({
+//        template:'<div>child custom component</div>'
+//    })
+//
+//    var Parent=Vue.extend({
+//        template:'<div><child-component></child-component></div>',
+//        components:{
+//            //<my-component>只能在父组件模板内
+//            'child-component':Child
+//        }
+//    })
+
+//    Vue.component('parent-component',Parent)
+
+//    //注册语法糖
+//    Vue.component('my-component',{
+//        tempplate:'<div>A custom component</div>'
+//    })
+//
+    //局部注册也可以这么做
+    var Parent=Vue.extend({
+        template:'<child-component></child-component>',
+        components:{
+            'child-component':{
+                template:'<div>child custom component</div>'
+            }
+        }
+    })
+    //创建根实例
+    new Vue({
+        el:"#app",
+        data:{
+
+        },
+        components:{
+           'my-parent':Parent
+        }
+    })
+</script>
+</body>
+</html>

@@ -3,21 +3,62 @@
 <head>
     <meta charset="UTF-8">
 
-    <title>Title</title>
+    <title>JS过渡</title>
 </head>
 <body>
 <script src="lib/vue.min.js"></script>
 <div id="app">
-    {{message}}
-    <input v-model="message">
-    <br>
+     <p v-if="show" transition="fade">Hello</p>
+     <button @click="show=!show">toggle</button>
 </div>
 <script>
-    new Vue({
-        el:"#app",data:{
-            message:"Hello Vue.js!"
-        }
-    })
+     new Vue({
+         el:'#app',
+         data:{
+             show:true
+         },
+         transition:{
+             fade:{
+                 css: false,
+                 enter: function (el, done) {
+                     // 元素已被插入 DOM
+                     // 在动画结束后调用 done
+                     $(el)
+                             .css('opacity', 0)
+                             .animate({ opacity: 1 }, 1000, done)
+                 },
+                 enterCancelled: function (el) {
+                     $(el).stop()
+                 },
+                 leave: function (el, done) {
+                     // 与 enter 相同
+                     $(el).animate({ opacity: 0 }, 1000, done)
+                 },
+                 leaveCancelled: function (el) {
+                     $(el).stop()
+                 }
+             }
+         }
+     });
+//
+//     Vue.transition('fade',{
+//         css:false,
+//         enter:function(el,done){
+//             //元素已被插入DOM
+//             //在动画结束后调用done
+//             $(el).css('opacity',0).animate({opacity:1},1000,done)
+//         },
+//         enterCancelled:function(el){
+//             $(el).stop()
+//         },
+//         leave:function(el,done){
+//             //与enter相同
+//             $(el).animate({opacity:0},1000,done)
+//         },
+//         leaveCancelled:function(el){
+//             $(el).stop()
+//         }
+//     })
 </script>
 </body>
 </html>
